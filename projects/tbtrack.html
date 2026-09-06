@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBTrack | Innocent Makaya</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .project-viewer {
+            min-height: 100vh;
+            background: var(--color-background);
+            color: var(--color-text);
+        }
+
+        .viewer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--color-text);
+            text-decoration: none;
+            margin-bottom: 3rem;
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: var(--color-accent);
+            color: var(--color-text-dark);
+            transform: translateX(-5px);
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        .content-section {
+            background: var(--color-surface);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 255, 209, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 8px 32px rgba(0, 255, 209, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 2rem;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-content ul {
+            list-style: none;
+        }
+
+        .section-content ul li {
+            margin-bottom: 0.5rem;
+            margin-left: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--color-surface-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 209, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: 0 8px 24px rgba(0, 255, 209, 0.2);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 209, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .step-card {
+            position: relative;
+            background: var(--color-surface-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 209, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: 0 8px 24px rgba(0, 255, 209, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--color-accent);
+            color: var(--color-text-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 4px solid var(--color-surface);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            border: 4px solid var(--color-surface);
+        }
+
+        .timeline-content {
+            background: var(--color-surface-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-description {
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.75rem 1.5rem;
+            background: var(--color-surface-light);
+            color: var(--color-accent);
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--color-accent);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: var(--color-accent);
+            color: var(--color-text-dark);
+            transform: translateY(-2px);
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(0, 255, 209, 0.3), 0 0 40px rgba(0, 255, 209, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(0, 255, 209, 0.6), 0 0 60px rgba(0, 255, 209, 0.3);
+            }
+        }
+
+        .video-frame video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid var(--color-accent);
+            border-radius: 16px;
+        }
+
+        .video-label {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .viewer-container {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+            }
+
+            .timeline-marker {
+                left: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-viewer">
+        <div class="viewer-container">
+            <a href="../index.html#projects" class="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Projects
+            </a>
+
+            <div class="project-header">
+                <h1 class="project-title">TBTrack</h1>
+                <p class="project-subtitle">TB Medication Adherence Monitoring Dashboard</p>
+                <p class="project-subtitle" style="font-size: 1rem; margin-top: 1rem; font-weight: 400;">Full-Stack Clinical Web Application for Remote Patient Monitoring</p>
+            </div>
+
+            <!-- Problem Statement -->
+            <div class="content-section">
+                <h2 class="section-title">Problem Statement</h2>
+                <div class="section-content">
+                    <p>Tuberculosis (TB) treatment requires patients to take medication consistently for several months. Missing doses can reduce treatment effectiveness, increase the risk of drug resistance, and make it difficult for healthcare professionals to monitor patient progress. In the first iteration of the Smart Pillbox project, patient adherence data was stored in Google Sheets. While this was suitable for prototyping, it lacked scalability, security, and advanced patient management capabilities required for a real-world healthcare system.</p>
+                    
+                    <p>To address these limitations, TBTrack was developed as the second iteration of the Smart Pillbox project. TBTrack replaces the Google Sheets backend with a secure PostgreSQL database and provides healthcare professionals with a dedicated web platform for monitoring patients, tracking medication adherence, and managing treatment plans.</p>
+                </div>
+            </div>
+
+            <!-- What is TBTrack -->
+            <div class="content-section">
+                <h2 class="section-title">What is TBTrack?</h2>
+                <div class="section-content">
+                    <p>TBTrack is a clinical web dashboard designed for healthcare professionals to remotely monitor tuberculosis patients using data collected from the Smart Pillbox system.</p>
+                    
+                    <p style="margin-top: 1.5rem; font-weight: 600; color: var(--color-accent); font-size: 1.1rem;">The platform allows healthcare workers to:</p>
+                    <ul>
+                        <li>✓ Manage patient records</li>
+                        <li>✓ Prescribe medications</li>
+                        <li>✓ Create treatment schedules</li>
+                        <li>✓ Monitor medication adherence</li>
+                        <li>✓ Track reported side effects</li>
+                        <li>✓ Schedule appointments</li>
+                        <li>✓ View treatment progress in real time</li>
+                    </ul>
+                    
+                    <p style="margin-top: 1.5rem;">By centralising patient information in a secure database, TBTrack helps healthcare professionals make informed decisions and quickly identify patients who may be missing doses or experiencing treatment difficulties.</p>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="content-section">
+                <h2 class="section-title">How It Works</h2>
+                <div class="section-content">
+                    <p>TBTrack acts as the software monitoring layer of the Smart Pillbox system.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Patient Registration</h3>
+                        <p class="step-description">Healthcare professionals create and manage patient records within the system.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Treatment Planning</h3>
+                        <p class="step-description">Medications, dosage schedules, and treatment plans are assigned to patients.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Adherence Monitoring</h3>
+                        <p class="step-description">Medication intake data from the Smart Pillbox is stored and displayed through interactive dashboards and visual reports.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Clinical Decision Support</h3>
+                        <p class="step-description">Healthcare professionals review adherence trends, side effects, and appointments to support patient treatment and improve outcomes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Process -->
+            <div class="content-section">
+                <h2 class="section-title">Development Process</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">1. System Architecture Design</h3>
+                            <p class="timeline-description">Designed the application using an N-Layered Architecture to separate the frontend, backend, and database layers for better maintainability and scalability.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">2. Database Design</h3>
+                            <p class="timeline-description">Replaced the original Google Sheets storage system with a fully normalised PostgreSQL database consisting of seven interconnected tables for patients, medications, schedules, adherence logs, side effects, appointments, and healthcare workers.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">3. Backend API Development</h3>
+                            <p class="timeline-description">Built a RESTful API using Node.js and Express to handle patient management, medication scheduling, adherence tracking, appointments, and side-effect reporting.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">4. Authentication & Security</h3>
+                            <p class="timeline-description">Implemented secure authentication using JWT tokens, bcrypt password hashing, email verification, and password reset functionality to ensure only authorised healthcare professionals can access patient data.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">5. Frontend Development</h3>
+                            <p class="timeline-description">Developed a responsive user interface using React, TypeScript, and Tailwind CSS, providing healthcare professionals with an intuitive dashboard for patient management and monitoring.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">6. Data Visualisation</h3>
+                            <p class="timeline-description">Created interactive charts and treatment progress visualisations to help healthcare workers quickly understand patient adherence trends.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">7. Testing & Validation</h3>
+                            <p class="timeline-description">Tested all major workflows including authentication, patient management, medication scheduling, adherence tracking, and appointment management to ensure reliable operation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Video -->
+            <div class="content-section">
+                <h2 class="section-title">Project Demonstration</h2>
+                <div class="section-content">
+                    <p>Watch the TBTrack application in action. See how healthcare professionals interact with the dashboard, manage patient records, and monitor medication adherence in real-time.</p>
+                </div>
+                <div class="video-frame">
+                    <video controls>
+                        <source src="../TBTrack Images/TBTrack.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-label">✨ Check Demo Here ✨</div>
+            </div>
+
+            <!-- Technologies Used -->
+            <div class="content-section">
+                <h2 class="section-title">Technologies & Tools</h2>
+                <div class="section-content">
+                    <h3 style="color: var(--color-accent); margin-bottom: 1rem; font-size: 1.3rem; font-weight: 600;">Frontend</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                    </div>
+
+                    <h3 style="color: var(--color-accent); margin-bottom: 1rem; margin-top: 2rem; font-size: 1.3rem; font-weight: 600;">Backend</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
+
+                    <h3 style="color: var(--color-accent); margin-bottom: 1rem; margin-top: 2rem; font-size: 1.3rem; font-weight: 600;">Database</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+
+                    <h3 style="color: var(--color-accent); margin-bottom: 1rem; margin-top: 2rem; font-size: 1.3rem; font-weight: 600;">Security & Authentication</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">bcrypt</span>
+                        <span class="tech-tag">Resend API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
